@@ -1,9 +1,8 @@
 import React from "react";
 import { useCurrentFrame, interpolate, spring, useVideoConfig } from "remotion";
-import { Vector3 } from "@react-three/fiber";
 import { CubistText } from "./CubistText";
 import { CubistShape } from "./CubistShape";
-import { CUBIST_COLORS, CUBIST_TIMING } from "../helpers/cubism-styles";
+import { COLORS } from "../helpers/cubism-styles";
 
 interface CryptoSectionProps {
   section: "foundations" | "publicKey" | "randomness" | "threshold" | "shamir" | "dkg" | "bls" | "thresholdBls" | "encryption" | "realWorld";
@@ -45,7 +44,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         text="Foundations of Cryptography"
         position={[0, 2, 0]}
         size="title"
-        color={CUBIST_COLORS.accent}
+        color={COLORS.accent}
       />
       
       {/* Plaintext representation */}
@@ -53,15 +52,15 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         <CubistShape
           type="cube"
           size={0.8}
-          color={CUBIST_COLORS.plaintext}
-          material="matte"
+          color={COLORS.plaintext}
+          material="neon"
           opacity={entranceSpring}
         />
         <CubistText
           text="Plaintext"
           position={[0, -1.2, 0]}
           size="subtitle"
-          color={CUBIST_COLORS.plaintext}
+          color={COLORS.plaintext}
         />
       </group>
 
@@ -71,7 +70,8 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         position={[0, 0, 0]}
         size={[0.05, 0.05, 1]}
         rotation={[0, 0, Math.PI / 2]}
-        color={CUBIST_COLORS.medium}
+        color={COLORS.textSecondary}
+        material="glossy"
         opacity={entranceSpring}
       />
 
@@ -80,8 +80,8 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         <CubistShape
           type="cube"
           size={0.8}
-          color={CUBIST_COLORS.ciphertext}
-          material="semiGloss"
+          color={COLORS.ciphertext}
+          material="holographic"
           fragmented={sectionProgress > 0.5}
           opacity={entranceSpring}
         />
@@ -89,7 +89,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
           text="Ciphertext"
           position={[0, -1.2, 0]}
           size="subtitle"
-          color={CUBIST_COLORS.ciphertext}
+          color={COLORS.ciphertext}
           fragmented={sectionProgress > 0.5}
         />
       </group>
@@ -100,30 +100,30 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
           type="sphere"
           position={[-1, 0, 0]}
           size={0.4}
-          color={CUBIST_COLORS.key}
-          material="metallic"
+          color={COLORS.key}
+          material="holographic"
           opacity={entranceSpring * 0.7}
         />
         <CubistText
           text="Private Key"
           position={[-1, -0.8, 0]}
           size="body"
-          color={CUBIST_COLORS.key}
+          color={COLORS.key}
         />
         
         <CubistShape
           type="sphere"
           position={[1, 0, 0]}
           size={0.4}
-          color={CUBIST_COLORS.key}
-          material="matte"
+          color={COLORS.key}
+          material="neon"
           opacity={entranceSpring}
         />
         <CubistText
           text="Public Key"
           position={[1, -0.8, 0]}
           size="body"
-          color={CUBIST_COLORS.key}
+          color={COLORS.key}
         />
       </group>
     </group>
@@ -135,7 +135,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         text="Why Randomness Matters"
         position={[0, 2, 0]}
         size="title"
-        color={CUBIST_COLORS.accent}
+        color={COLORS.accent}
       />
       
       {/* Predictable pattern */}
@@ -144,7 +144,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
           text="Predictable (Unsafe)"
           position={[0, 1, 0]}
           size="subtitle"
-          color={CUBIST_COLORS.vulnerable}
+          color={COLORS.vulnerable}
         />
         {[0, 1, 2, 3].map((i) => (
           <CubistShape
@@ -152,7 +152,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
             type="cube"
             position={[i * 0.3 - 0.45, 0, 0]}
             size={0.2}
-            color={CUBIST_COLORS.vulnerable}
+            color={COLORS.vulnerable}
             opacity={entranceSpring}
           />
         ))}
@@ -164,7 +164,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
           text="Cryptographically Secure"
           position={[0, 1, 0]}
           size="subtitle"
-          color={CUBIST_COLORS.secure}
+          color={COLORS.secure}
         />
         {[0, 1, 2, 3].map((i) => (
           <CubistShape
@@ -176,7 +176,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
               (Math.sin(i * 3.1) * 0.1)
             ]}
             size={0.15 + Math.sin(i * 1.5) * 0.05}
-            color={CUBIST_COLORS.secure}
+            color={COLORS.secure}
             rotation={[
               Math.sin(i * 2.1) * 0.5,
               Math.cos(i * 1.9) * 0.5,
@@ -195,7 +195,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         text="Threshold Cryptography"
         position={[0, 2.5, 0]}
         size="title"
-        color={CUBIST_COLORS.accent}
+        color={COLORS.accent}
       />
       
       {/* Central secret */}
@@ -203,8 +203,8 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         type="sphere"
         position={[0, 1, 0]}
         size={0.6}
-        color={CUBIST_COLORS.key}
-        material="metallic"
+        color={COLORS.key}
+        material="holographic"
         opacity={entranceSpring * (1 - sectionProgress * 0.7)}
       />
       
@@ -221,14 +221,14 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
               type="cube"
               position={[x, y, 0]}
               size={0.3}
-              color={CUBIST_COLORS.secondary}
+              color={COLORS.secondary}
               opacity={entranceSpring * sectionProgress}
             />
             <CubistText
               text={`Share ${i + 1}`}
               position={[x, y - 0.6, 0]}
               size="body"
-              color={CUBIST_COLORS.secondary}
+              color={COLORS.secondary}
               opacity={sectionProgress}
             />
           </group>
@@ -239,7 +239,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
         text="Any 3 of 5 shares can reconstruct the secret"
         position={[0, -2, 0]}
         size="subtitle"
-        color={CUBIST_COLORS.primary}
+        color={COLORS.primary}
         opacity={sectionProgress}
       />
     </group>
@@ -259,7 +259,7 @@ export const CryptoSection: React.FC<CryptoSectionProps> = ({
           text={`Section: ${section}`}
           position={[0, 0, 0]}
           size="title"
-          color={CUBIST_COLORS.accent}
+          color={COLORS.accent}
         />
       );
   }

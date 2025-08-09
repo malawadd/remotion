@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "@react-three/drei";
 import { Vector3 } from "@react-three/fiber";
 import { random } from "remotion";
-import { CUBIST_COLORS, CUBIST_DIMENSIONS } from "../helpers/cubism-styles";
+import { COLORS, DIMENSIONS } from "../helpers/cubism-styles";
 
 interface CubistTextProps {
   text: string;
@@ -17,11 +17,11 @@ export const CubistText: React.FC<CubistTextProps> = ({
   text,
   position = [0, 0, 0],
   size = "body",
-  color = CUBIST_COLORS.primary,
+  color = COLORS.textPrimary,
   fragmented = false,
   opacity = 1,
 }) => {
-  const fontSize = CUBIST_DIMENSIONS.text[size];
+  const fontSize = DIMENSIONS.text[size];
 
   if (fragmented) {
     // Split text into fragments for Cubist effect
@@ -50,7 +50,10 @@ export const CubistText: React.FC<CubistTextProps> = ({
               color={color}
               transparent
               opacity={opacity}
-              roughness={0.8}
+              roughness={0.3}
+              metalness={0.1}
+              emissive={color}
+              emissiveIntensity={0.1}
             />
             {word}
           </Text>
@@ -71,7 +74,10 @@ export const CubistText: React.FC<CubistTextProps> = ({
         color={color}
         transparent
         opacity={opacity}
-        roughness={0.8}
+        roughness={0.3}
+        metalness={0.1}
+        emissive={color}
+        emissiveIntensity={0.1}
       />
       {text}
     </Text>
