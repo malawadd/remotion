@@ -71,6 +71,12 @@ export const Scene: React.FC<
           color={CUBIST_COLORS.highlight} 
         />
         
+        {/* TEMPORARY TEST CUBE */}
+        <mesh position={[0, 0, 0]}>
+          <boxGeometry args={[1, 1, 1]} />
+          <meshBasicMaterial color="blue" />
+        </mesh>
+        
         {/* Render sections */}
         {section ? (
           // Single section mode (for testing)
