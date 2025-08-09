@@ -1,26 +1,29 @@
 import { Composition } from "remotion";
 import { Scene, myCompSchema } from "./Scene";
 
-// Welcome to the Remotion Three Starter Kit!
-// Two compositions have been created, showing how to use
-// the `ThreeCanvas` component and the `useVideoTexture` hook.
-
-// You can play around with the example or delete everything inside the canvas.
-
-// Remotion Docs:
-// https://remotion.dev/docs
-
-// @remotion/three Docs:
-// https://remotion.dev/docs/three
-
-// React Three Fiber Docs:
-// https://docs.pmnd.rs/react-three-fiber/getting-started/introduction
+// Cubism Interfaces Cryptography Explainer Video
+// An informative video explaining cryptographic concepts using Cubist visual design
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      {/* Full cryptography explainer video */}
       <Composition
-        id="Scene"
+        id="CryptographyExplainer"
+        component={Scene}
+        durationInFrames={1800} // 60 seconds at 30fps
+        fps={30}
+        width={1280}
+        height={720}
+        schema={myCompSchema}
+        defaultProps={{
+          totalDuration: 1800,
+        }}
+      />
+      
+      {/* Individual section previews for testing */}
+      <Composition
+        id="FoundationsPreview"
         component={Scene}
         durationInFrames={300}
         fps={30}
@@ -28,9 +31,33 @@ export const RemotionRoot: React.FC = () => {
         height={720}
         schema={myCompSchema}
         defaultProps={{
-          deviceType: "phone",
-          phoneColor: "rgba(110, 152, 191, 0.00)" as const,
-          baseScale: 1,
+          section: "foundations" as const,
+        }}
+      />
+      
+      <Composition
+        id="RandomnessPreview"
+        component={Scene}
+        durationInFrames={300}
+        fps={30}
+        width={1280}
+        height={720}
+        schema={myCompSchema}
+        defaultProps={{
+          section: "randomness" as const,
+        }}
+      />
+      
+      <Composition
+        id="ThresholdPreview"
+        component={Scene}
+        durationInFrames={300}
+        fps={30}
+        width={1280}
+        height={720}
+        schema={myCompSchema}
+        defaultProps={{
+          section: "threshold" as const,
         }}
       />
     </>
