@@ -1,10 +1,10 @@
 import { ThreeCanvas } from "@remotion/three";
 import React, { useEffect } from "react";
-import { AbsoluteFill, useVideoConfig, useCurrentFrame } from "remotion";
+import { AbsoluteFill, useVideoConfig } from "remotion";
 import { z } from "zod";
 import { useThree } from "@react-three/fiber";
 import { CryptoSection } from "./components/CryptoSection";
-import { CUBIST_COLORS, CUBIST_TIMING, CAMERA_POSITIONS } from "./helpers/cubism-styles";
+import { CUBIST_COLORS, CAMERA_POSITIONS } from "./helpers/cubism-styles";
 
 const container: React.CSSProperties = {
   backgroundColor: CUBIST_COLORS.light,
@@ -21,10 +21,12 @@ const CameraController: React.FC = () => {
   const camera = useThree((state) => state.camera);
   
   useEffect(() => {
-    camera.position.set(...CAMERA_POSITIONS.overview);
+    const position = CAMERA_POSITIONS.overview as [number, number, number];
+    camera.position.set(position[0], position[1], position[2]);
     camera.near = 0.1;
     camera.far = 1000;
     camera.lookAt(0, 0, 0);
+    camera.updateProjectionMatrix();
   }, [camera]);
   
   return null;
@@ -34,9 +36,8 @@ export const Scene: React.FC<
   {
     readonly totalDuration?: number;
   } & MyCompSchemaType
-> = ({ section, totalDuration = 1800 }) => { // 60 seconds at 30fps
+> = ({ section }) => {
   const { width, height } = useVideoConfig();
-  const frame = useCurrentFrame();
   
   // Define sections with their frame ranges
   const sections = [
@@ -54,7 +55,12 @@ export const Scene: React.FC<
 
   return (
     <AbsoluteFill style={container}>
-      <ThreeCanvas linear width={width} height={height}>
+      <ThreeCanvas 
+        linear 
+        width={width} 
+        height={height}
+        camera={{ position: [0, 0, 4], fov: 75 }}
+      >
         <CameraController />
         
         {/* Lighting setup for Cubist aesthetic */}
@@ -71,10 +77,10 @@ export const Scene: React.FC<
           color={CUBIST_COLORS.highlight} 
         />
         
-        {/* TEMPORARY TEST CUBE */}
+        {/* TEMPORARY TEST CUBE - Made more visible */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshBasicMaterial color="blue" />
+          <meshStandardMaterial color="blue" />
         </mesh>
         
         {/* Render sections */}

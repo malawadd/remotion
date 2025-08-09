@@ -1,6 +1,7 @@
 import React from "react";
 import { Text } from "@react-three/drei";
 import { Vector3 } from "@react-three/fiber";
+import { random } from "remotion";
 import { CUBIST_COLORS, CUBIST_DIMENSIONS } from "../helpers/cubism-styles";
 
 interface CubistTextProps {
@@ -36,15 +37,14 @@ export const CubistText: React.FC<CubistTextProps> = ({
               Math.cos(index * 0.3) * 0.05,
             ]}
             rotation={[
-              (Math.random() - 0.5) * 0.2,
-              (Math.random() - 0.5) * 0.2,
-              (Math.random() - 0.5) * 0.1,
+              (random(`rotation-x-${index}`) - 0.5) * 0.2,
+              (random(`rotation-y-${index}`) - 0.5) * 0.2,
+              (random(`rotation-z-${index}`) - 0.5) * 0.1,
             ]}
             fontSize={fontSize}
             color={color}
             anchorX="center"
             anchorY="middle"
-            font="/fonts/inter-bold.woff"
           >
             <meshStandardMaterial
               color={color}
@@ -66,7 +66,6 @@ export const CubistText: React.FC<CubistTextProps> = ({
       color={color}
       anchorX="center"
       anchorY="middle"
-      font="/fonts/inter-bold.woff"
     >
       <meshStandardMaterial
         color={color}
